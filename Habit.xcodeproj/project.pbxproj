@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		BC6734EA2AB746200076461A /* SplashUIState.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC6734E92AB746200076461A /* SplashUIState.swift */; };
+		BC8F29A52ABB1BED006088B2 /* SplashViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC8F29A42ABB1BED006088B2 /* SplashViewModel.swift */; };
 		BCBDF7222AB63A8F00394C2F /* HabitApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCBDF7212AB63A8F00394C2F /* HabitApp.swift */; };
 		BCBDF7262AB63A9100394C2F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BCBDF7252AB63A9100394C2F /* Assets.xcassets */; };
 		BCBDF7292AB63A9100394C2F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BCBDF7282AB63A9100394C2F /* Preview Assets.xcassets */; };
@@ -16,6 +17,7 @@
 
 /* Begin PBXFileReference section */
 		BC6734E92AB746200076461A /* SplashUIState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashUIState.swift; sourceTree = "<group>"; };
+		BC8F29A42ABB1BED006088B2 /* SplashViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewModel.swift; sourceTree = "<group>"; };
 		BCBDF71E2AB63A8F00394C2F /* Habit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Habit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCBDF7212AB63A8F00394C2F /* HabitApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitApp.swift; sourceTree = "<group>"; };
 		BCBDF7252AB63A9100394C2F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -34,6 +36,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BC8F29A32ABB1B5B006088B2 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				BC8F29A42ABB1BED006088B2 /* SplashViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		BCBDF7152AB63A8F00394C2F = {
 			isa = PBXGroup;
 			children = (
@@ -72,6 +82,7 @@
 		BCBDF72F2AB63D2400394C2F /* Splash */ = {
 			isa = PBXGroup;
 			children = (
+				BC8F29A32ABB1B5B006088B2 /* ViewModel */,
 				BCBDF7312AB63D5300394C2F /* Model */,
 				BCBDF7302AB63D3E00394C2F /* View */,
 			);
@@ -167,6 +178,7 @@
 				BC6734EA2AB746200076461A /* SplashUIState.swift in Sources */,
 				BCBDF7222AB63A8F00394C2F /* HabitApp.swift in Sources */,
 				BCBDF7332AB63DD800394C2F /* SplashView.swift in Sources */,
+				BC8F29A52ABB1BED006088B2 /* SplashViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

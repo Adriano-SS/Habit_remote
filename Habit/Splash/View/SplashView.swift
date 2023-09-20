@@ -8,19 +8,24 @@
 import SwiftUI
 
 struct SplashView: View {
-    @State var state: SplashUIState = .error("Perda de conexao com o servidor")
-    //@State var state: SplashUIState = .loading
+    //@State var state: SplashUIState = .error("Perda de conexao com o servidor")
+    @ObservedObject var viewModel: SplashViewModel
     var body: some View {
-        switch state{
-        case .loading:
-            loadingView()
-        case .goToSignInScreen:
-            Text("Tela de login")
-        case .goToHomeScreen:
-            Text("Tela principal")
-        case .error(let msg):
-           loadingView(error: msg)
-        }
+        VStack{
+            Group {
+                switch viewModel.uiState{
+                    case .loading:
+                        loadingView()
+                    case .goToSignInScreen:
+                        Text("Tela de login")
+                    case .goToHomeScreen:
+                        Text("Tela principal")
+                    case .error(let msg):
+                        loadingView(error: msg)
+                }
+            }.onAppear(perform: {
+                viewModel.onApperar()
+            })        }
     }
 }
 
@@ -48,6 +53,7 @@ extension SplashView {
 
 struct SplashView_Previews: PreviewProvider {
     static var previews: some View {
-        SplashView()
+        let viewModel = SplashViewModel()
+        SplashView(viewModel: viewModel)
     }
 }
