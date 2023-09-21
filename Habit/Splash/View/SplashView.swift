@@ -17,7 +17,9 @@ struct SplashView: View {
                     case .loading:
                         loadingView()
                     case .goToSignInScreen:
-                        Text("Tela de login")
+                        viewModel.signInView()
+                    case .goToSignUpScrenn:
+                    viewModel.signUpView()
                     case .goToHomeScreen:
                         Text("Tela principal")
                     case .error(let msg):
