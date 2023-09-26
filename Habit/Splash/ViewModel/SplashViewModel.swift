@@ -10,9 +10,10 @@ class SplashViewModel: ObservableObject {
     @Published var uiState: SplashUIState = .loading
     
     func onApperar(){
+        uiState = .loading
         DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
             //self.uiState = .error("Perda de conexao com o servidor")
-            self.uiState = .goToSignUpScrenn
+            self.uiState = .goToSignInScreen
         }
     }
 }
@@ -21,8 +22,13 @@ extension SplashViewModel {
     func signInView() -> some View {
         return SplashViewRouter.makeSignInView()
     }
-    
+}
+
+extension SplashViewModel{
     func signUpView() -> some View {
         return SplashViewRouter.makeSignUpView()
     }
 }
+    
+    
+

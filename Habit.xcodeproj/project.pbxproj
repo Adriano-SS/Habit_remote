@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BC0255062AC3156C00709B00 /* Gender.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC0255052AC3156C00709B00 /* Gender.swift */; };
+		BC3FEB382AC24F410097AA35 /* SignInUIState.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC3FEB372AC24F410097AA35 /* SignInUIState.swift */; };
+		BC3FEB3A2AC25A3F0097AA35 /* SignInViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC3FEB392AC25A3F0097AA35 /* SignInViewRouter.swift */; };
+		BC3FEB402AC25B4C0097AA35 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC3FEB3F2AC25B4C0097AA35 /* HomeView.swift */; };
+		BC3FEB422AC25BBE0097AA35 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC3FEB412AC25BBE0097AA35 /* HomeViewModel.swift */; };
 		BC6734EA2AB746200076461A /* SplashUIState.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC6734E92AB746200076461A /* SplashUIState.swift */; };
 		BC8F29A52ABB1BED006088B2 /* SplashViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC8F29A42ABB1BED006088B2 /* SplashViewModel.swift */; };
 		BCA745C12ABBCBCA0083A5F3 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA745C02ABBCBCA0083A5F3 /* SignInView.swift */; };
@@ -21,6 +26,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BC0255052AC3156C00709B00 /* Gender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gender.swift; sourceTree = "<group>"; };
+		BC3FEB372AC24F410097AA35 /* SignInUIState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInUIState.swift; sourceTree = "<group>"; };
+		BC3FEB392AC25A3F0097AA35 /* SignInViewRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewRouter.swift; sourceTree = "<group>"; };
+		BC3FEB3F2AC25B4C0097AA35 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		BC3FEB412AC25BBE0097AA35 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		BC6734E92AB746200076461A /* SplashUIState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashUIState.swift; sourceTree = "<group>"; };
 		BC8F29A42ABB1BED006088B2 /* SplashViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewModel.swift; sourceTree = "<group>"; };
 		BCA745C02ABBCBCA0083A5F3 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
@@ -46,6 +56,55 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BC0255032AC314E700709B00 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				BC0255042AC314F000709B00 /* Model */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		BC0255042AC314F000709B00 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				BC0255052AC3156C00709B00 /* Gender.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		BC3FEB3B2AC25AFE0097AA35 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				BC3FEB3E2AC25B260097AA35 /* View */,
+				BC3FEB3D2AC25B1C0097AA35 /* ViewModel */,
+				BC3FEB3C2AC25B0A0097AA35 /* Model */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		BC3FEB3C2AC25B0A0097AA35 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		BC3FEB3D2AC25B1C0097AA35 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				BC3FEB412AC25BBE0097AA35 /* HomeViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		BC3FEB3E2AC25B260097AA35 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				BC3FEB3F2AC25B4C0097AA35 /* HomeView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		BC8F29A32ABB1B5B006088B2 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -76,6 +135,7 @@
 		BCA745BE2ABBCB2C0083A5F3 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				BC3FEB372AC24F410097AA35 /* SignInUIState.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -84,6 +144,7 @@
 			isa = PBXGroup;
 			children = (
 				BCA745C22ABBCC110083A5F3 /* SignInViewModel.swift */,
+				BC3FEB392AC25A3F0097AA35 /* SignInViewRouter.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -140,6 +201,8 @@
 		BCBDF7202AB63A8F00394C2F /* Habit */ = {
 			isa = PBXGroup;
 			children = (
+				BC0255032AC314E700709B00 /* Common */,
+				BC3FEB3B2AC25AFE0097AA35 /* Home */,
 				BCA745C62ABBD53D0083A5F3 /* SignUp */,
 				BCA745BB2ABBCAEE0083A5F3 /* SignIn */,
 				BCBDF72F2AB63D2400394C2F /* Splash */,
@@ -255,12 +318,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				BC6734EA2AB746200076461A /* SplashUIState.swift in Sources */,
+				BC3FEB3A2AC25A3F0097AA35 /* SignInViewRouter.swift in Sources */,
 				BCBDF7222AB63A8F00394C2F /* HabitApp.swift in Sources */,
 				BCA745C32ABBCC110083A5F3 /* SignInViewModel.swift in Sources */,
+				BC3FEB382AC24F410097AA35 /* SignInUIState.swift in Sources */,
 				BCBDF7332AB63DD800394C2F /* SplashView.swift in Sources */,
+				BC0255062AC3156C00709B00 /* Gender.swift in Sources */,
 				BCA745CD2ABBD5F90083A5F3 /* SignUpViewModel.swift in Sources */,
 				BCA745CB2ABBD59A0083A5F3 /* SignUpView.swift in Sources */,
+				BC3FEB422AC25BBE0097AA35 /* HomeViewModel.swift in Sources */,
 				BC8F29A52ABB1BED006088B2 /* SplashViewModel.swift in Sources */,
+				BC3FEB402AC25B4C0097AA35 /* HomeView.swift in Sources */,
 				BCA745C52ABBCFE50083A5F3 /* SplashViewRouter.swift in Sources */,
 				BCA745C12ABBCBCA0083A5F3 /* SignInView.swift in Sources */,
 			);
@@ -319,7 +387,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -373,7 +441,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
