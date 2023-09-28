@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SignInView: View {
-    @ObservedObject var viewModel: SignInViewModel
+    @ObservedObject var viewModel: SignInViewModel  
     
     @State var email: String = ""
     @State var password: String = ""
@@ -123,7 +123,7 @@ extension SignInView {
                  selection: $action,
                  label: {EmptyView()})*/
                 NavigationLink {
-                    SplashViewRouter.makeSignUpView()
+                    viewModel.signUpView()
                 }
                 label: {
                     Text("Realize seu cadastro")

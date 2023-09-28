@@ -23,6 +23,8 @@
 		BCBDF7262AB63A9100394C2F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BCBDF7252AB63A9100394C2F /* Assets.xcassets */; };
 		BCBDF7292AB63A9100394C2F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BCBDF7282AB63A9100394C2F /* Preview Assets.xcassets */; };
 		BCBDF7332AB63DD800394C2F /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCBDF7322AB63DD800394C2F /* SplashView.swift */; };
+		BCC8E6552AC4E01700AE7059 /* SignUpUIState.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC8E6542AC4E01700AE7059 /* SignUpUIState.swift */; };
+		BCC8E6572AC4E36500AE7059 /* SignUpViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC8E6562AC4E36500AE7059 /* SignUpViewRouter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +45,8 @@
 		BCBDF7252AB63A9100394C2F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BCBDF7282AB63A9100394C2F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		BCBDF7322AB63DD800394C2F /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
+		BCC8E6542AC4E01700AE7059 /* SignUpUIState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpUIState.swift; sourceTree = "<group>"; };
+		BCC8E6562AC4E36500AE7059 /* SignUpViewRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewRouter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,6 +166,7 @@
 		BCA745C72ABBD54B0083A5F3 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				BCC8E6542AC4E01700AE7059 /* SignUpUIState.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -170,6 +175,7 @@
 			isa = PBXGroup;
 			children = (
 				BCA745CC2ABBD5F90083A5F3 /* SignUpViewModel.swift */,
+				BCC8E6562AC4E36500AE7059 /* SignUpViewRouter.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -320,6 +326,8 @@
 				BC6734EA2AB746200076461A /* SplashUIState.swift in Sources */,
 				BC3FEB3A2AC25A3F0097AA35 /* SignInViewRouter.swift in Sources */,
 				BCBDF7222AB63A8F00394C2F /* HabitApp.swift in Sources */,
+				BCC8E6572AC4E36500AE7059 /* SignUpViewRouter.swift in Sources */,
+				BCC8E6552AC4E01700AE7059 /* SignUpUIState.swift in Sources */,
 				BCA745C32ABBCC110083A5F3 /* SignInViewModel.swift in Sources */,
 				BC3FEB382AC24F410097AA35 /* SignInUIState.swift in Sources */,
 				BCBDF7332AB63DD800394C2F /* SplashView.swift in Sources */,

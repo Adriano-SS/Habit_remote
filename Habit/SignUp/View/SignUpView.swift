@@ -41,7 +41,16 @@ struct SignUpView: View {
                     Spacer()
                 }.padding(.horizontal, 8)
             }.padding()
-        }        
+            if case SignUpUIState.error(let value) = viewModel.uiState {
+                Text("")
+                    .alert(isPresented: .constant(true)){
+                        Alert(title: Text("Personal Habits"), message: Text(value), dismissButton: .default(Text("OK")){
+                            //acao ao fechar o botao
+                        })
+                    }
+                    .background(Color.red)
+            }            
+        }
     }
 }
 
@@ -106,7 +115,7 @@ extension SignUpView {
 extension SignUpView {
     var saveButton: some View {
         Button("Realize seu cadastro") {
-            
+            viewModel.signUp(fullName: fullName, email: email, password: password, document: document, phone: phone, gender: gender)
         }
     }
 }

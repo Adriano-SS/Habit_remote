@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SplashView: View {
-    //@State var state: SplashUIState = .error("Perda de conexao com o servidor")
+    
     @ObservedObject var viewModel: SplashViewModel
     var body: some View {
         VStack{
@@ -17,11 +17,9 @@ struct SplashView: View {
                     case .loading:
                         loadingView()
                     case .goToSignInScreen:
-                        viewModel.signInView()
-                    case .goToSignUpScreen:
-                    viewModel.signUpView()
+                        viewModel.signInView()                    
                     case .goToHomeScreen:
-                        Text("Tela principal")
+                    viewModel.homeView()
                     case .error(let msg):
                         loadingView(error: msg)
                 }
