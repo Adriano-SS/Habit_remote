@@ -36,8 +36,7 @@ extension SplashView {
                 .resizable()
                 .scaledToFit()
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .ignoresSafeArea()
-                .background(Color.white)
+                .ignoresSafeArea()                
             if let error = error {
                 Text("")
                     .alert(isPresented: .constant(true)){
@@ -53,7 +52,11 @@ extension SplashView {
 
 struct SplashView_Previews: PreviewProvider {
     static var previews: some View {
-        let viewModel = SplashViewModel()
-        SplashView(viewModel: viewModel)
+        ForEach(ColorScheme.allCases, id: \.self) {
+            let viewModel = SplashViewModel()
+            SplashView(viewModel: viewModel)
+                .previewDevice("Iphone 11")
+                .preferredColorScheme($0)
+        }
     }
 }

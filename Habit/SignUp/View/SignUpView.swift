@@ -8,15 +8,7 @@
 import SwiftUI
 
 struct SignUpView: View {
-    @ObservedObject var viewModel: SignUpViewModel
-    
-    @State var fullName: String = ""
-    @State var email: String = ""
-    @State var password: String = ""
-    @State var document: String = ""
-    @State var phone: String = ""
-    @State var birthday: String = ""
-    @State var gender: Gender = .male
+    @ObservedObject var viewModel: SignUpViewModel   
     
     var body: some View {
         ZStack {
@@ -24,7 +16,7 @@ struct SignUpView: View {
                 VStack(alignment: .center) {
                     VStack(alignment: .leading, spacing: 8) {
                         Text("Cadastro")
-                            .foregroundColor(Color.black)
+                            .foregroundColor(Color("textColor"))
                             .font(Font.system(.title).bold())
                             .padding(.bottom, 8)
                         
@@ -39,7 +31,9 @@ struct SignUpView: View {
                     }
                     
                     Spacer()
-                }.padding(.horizontal, 8)
+                }
+                .padding(.horizontal, 8)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
             }.padding()
             if case SignUpUIState.error(let value) = viewModel.uiState {
                 Text("")
@@ -49,56 +43,58 @@ struct SignUpView: View {
                         })
                     }
                     .background(Color.red)
-            }            
+            }
         }
     }
 }
 
 extension SignUpView {
     var fullNameField: some View {
-        TextField("Nome completo", text: $fullName)
-            .border(.black)
+        EditTextView(placeholder: "Nome completo", text: $viewModel.fullName, keyboard: .alphabet, error: "Nome deve ter mais que 4 letras", failure: viewModel.fullName.count < 4)
     }
 }
 
 extension SignUpView {
     var emailField: some View {
-        TextField("E-mail", text: $email)
-            .border(.black)
+        EditTextView( placeholder: "E-mail",
+                      text: $viewModel.email,
+                      keyboard: .emailAddress,
+                      error: "E-mail invalido!",
+                      failure: !viewModel.email.isEmail())
     }
 }
 
 extension SignUpView {
     var passwordField: some View {
-        TextField("Password", text: $password)
-            .border(.black)
+        EditTextView( placeholder: "Password",
+                      text: $viewModel.password,
+                      error: "A senha deve ter 6 caracteres!",
+                      failure: viewModel.password.count < 6,
+                      isSecure: true)
     }
 }
 
 extension SignUpView {
     var documentField: some View {
-        TextField("Document", text: $document)
-            .border(.black)
+        EditTextView(placeholder: "CPF", text: $viewModel.document, keyboard: .numberPad, error: "CPF deve conter 11 numeros!", failure: viewModel.document.count != 11)
+        
     }
 }
 
 extension SignUpView {
     var phoneField: some View {
-        TextField("Phone", text: $phone)
-            .border(.black)
+        EditTextView(placeholder: "Celular", text: $viewModel.phone, keyboard: .phonePad, error: "Use o formato XX XXXXX-XXXX", failure: viewModel.phone.count < 10 || viewModel.phone.count > 11)
     }
 }
 
 extension SignUpView {
     var birthdayField: some View {
-        TextField("Birthday", text: $birthday)
-            .border(.black)
-    }
+        EditTextView(placeholder: "Data de nascimento", text: $viewModel.birthday, keyboard: .numberPad, error: "Use o formato: dd/MM/aaaa", failure: viewModel.birthday.count != 10)    }
 }
 
 extension SignUpView {
     var genderField: some View {
-        Picker("Gender", selection: $gender) {
+        Picker("Gender", selection: $viewModel.gender) {
             ForEach(Gender.allCases, id: \.self) { value in
                 Text(value.rawValue)
                     .tag(value)
@@ -107,21 +103,27 @@ extension SignUpView {
         .border(.black)
         .pickerStyle(SegmentedPickerStyle())
         .padding(.top, 16)
-        .padding(.bottom, 32)
-        
+        .padding(.bottom, 32)       
     }
 }
 
 extension SignUpView {
     var saveButton: some View {
-        Button("Realize seu cadastro") {
-            viewModel.signUp(fullName: fullName, email: email, password: password, document: document, phone: phone, gender: gender)
-        }
+        LoadingButtonView(
+            action: { viewModel.signUp()},
+            text: "Realize seu cadastro",
+            showProgress: self.viewModel.uiState == SignUpUIState.loading,
+            disable: !viewModel.email.isEmail() || viewModel.password.count < 6
+            )
     }
 }
 struct SignUpView_Previews: PreviewProvider {
     static var previews: some View {
-        let viewModel = SignUpViewModel()
-        SignUpView(viewModel: viewModel)
+        ForEach(ColorScheme.allCases, id: \.self) {
+            let viewModel = SignUpViewModel()
+            SignUpView(viewModel: viewModel)
+                .previewDevice("Iphone 11")
+                .preferredColorScheme($0)
+        }
     }
 }

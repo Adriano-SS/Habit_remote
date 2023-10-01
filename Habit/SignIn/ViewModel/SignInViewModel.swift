@@ -15,6 +15,9 @@ class SignInViewModel: ObservableObject {
     
     @Published var uiState: SignInUIState = .none
     
+    @Published var email: String = ""
+    @Published var password: String = ""
+    
     init() {
         cancellable = publisher.sink { value in
             if value {
@@ -28,11 +31,11 @@ class SignInViewModel: ObservableObject {
         cancellable?.cancel()
     }
     
-    func login(email: String, password: String) {
+    func login() {
         uiState = .loading
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            //self.uiState = .error("Usuario ou senha incorreta!")
-            self.uiState = .goToHomeScreen
+            self.uiState = .error("Usuario ou senha incorreta!")
+            //self.uiState = .goToHomeScreen
         }
     }
 }

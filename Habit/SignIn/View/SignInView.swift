@@ -8,10 +8,7 @@
 import SwiftUI
 
 struct SignInView: View {
-    @ObservedObject var viewModel: SignInViewModel  
-    
-    @State var email: String = ""
-    @State var password: String = ""
+    @ObservedObject var viewModel: SignInViewModel    
     
     //variavel desnecessaria com navigationLink(value, label)
     //@State var action: Int? = 0
@@ -38,7 +35,7 @@ struct SignInView: View {
                                 
                                 Text("Login")
                                     .font(.system(.title).bold())
-                                    .background(Color.white)
+                                    .foregroundColor(Color("textColor"))
                                     .padding(.bottom, 8)
                                 
                                 emailField
@@ -50,9 +47,9 @@ struct SignInView: View {
                                 registerLink
                                 
                                 
-                                Text("@Copyright 2023")
+                                Text("@Copyright - Adriano Soares 2023")
                                     .foregroundColor(.gray)
-                                    .font(Font.system(size: 16).bold())
+                                    .font(Font.system(size: 13).bold())
                                     .padding(.top, 16)
                             }
                         }
@@ -66,9 +63,8 @@ struct SignInView: View {
                                 .background(Color.red)
                         }
                     }
-                    //.frame(minWidth: .infinity, maxHeight: .infinity)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .padding(.horizontal, 32)
-                    .background(Color.white)
                     .navigationBarTitle("Login", displayMode: .inline)
                     .navigationBarHidden(navigationHidden)//falsa por padrao
                 }
@@ -87,27 +83,33 @@ struct SignInView: View {
 
 extension SignInView {
     var emailField: some View {
-        TextField("", text: $email)
-            .border(.black)
-            .padding(.bottom, 8)    }
+        EditTextView( placeholder: "E-mail",
+                      text: $viewModel.email,
+                      keyboard: .emailAddress,
+                      error: "E-mail invalido!",
+                      failure: !viewModel.email.isEmail())
+    }
 }
 
 extension SignInView {
     var passwordField: some View {
-        SecureField("", text: $password)
-            .border(.black)
-        
+        EditTextView( placeholder: "Password",
+                      text: $viewModel.password,
+                      error: "A senha deve ter 6 caracteres!",
+                      failure: viewModel.password.count < 6,
+                      isSecure: true)
     }
 }
 
 extension SignInView {
     var enterButton: some View {
-        Button("Entrar", action: {
-            viewModel.login(email: email, password: password)
-            //nada a fazer por agora
-        })
-        .font(.system(.title3).bold())
-        .padding(.bottom, 30)    }
+        LoadingButtonView(
+            action: { viewModel.login()},
+            text: "Entrar",
+            showProgress: self.viewModel.uiState == SignInUIState.loading,
+            disable: !viewModel.email.isEmail() || viewModel.password.count < 6
+            )
+        }
 }
 
 extension SignInView {
@@ -137,7 +139,11 @@ extension SignInView {
 
 struct SignInView_Previews: PreviewProvider {
     static var previews: some View {
-        let viewModel = SignInViewModel()
-        SignInView(viewModel: viewModel)
+        ForEach(ColorScheme.allCases, id: \.self) {
+            let viewModel = SignInViewModel()
+            SignInView(viewModel: viewModel)
+                .previewDevice("Iphone 11")
+                .preferredColorScheme($0)
+        }
     }
 }

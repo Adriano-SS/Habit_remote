@@ -10,11 +10,19 @@ import Combine
 
 class SignUpViewModel: ObservableObject {
     
-    @Published var uiState: SignUpUIState = .loading
+    @Published var uiState: SignUpUIState = .none
+    
+    @Published var fullName: String = ""
+    @Published var email: String = ""
+    @Published var password: String = ""
+    @Published var document: String = ""
+    @Published var phone: String = ""
+    @Published var birthday: String = ""
+    @Published var gender: Gender = .male
     
     var publisher: PassthroughSubject<Bool, Never>!
     
-    func signUp(fullName: String, email: String, password: String, document: String, phone: String, gender: Gender) {
+    func signUp() {
         uiState = .loading
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             //self.uiState = .error("Usuario ja existe!")
