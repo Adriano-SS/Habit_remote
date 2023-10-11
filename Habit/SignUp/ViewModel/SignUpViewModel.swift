@@ -24,11 +24,30 @@ class SignUpViewModel: ObservableObject {
     
     func signUp() {
         uiState = .loading
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            //self.uiState = .error("Usuario ja existe!")
-            self.uiState = .sucess
-            self.publisher.send(true)
+        
+        //Converte para formato de data
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.dateFormat = "dd/MM/yyyy"
+        
+        let dateFormatted  = formatter.date(from: birthday)
+        
+        //valida a entrada de usuario
+        guard let dateFormatted = dateFormatted else {
+            self.uiState = .error("Data invalida \(birthday)")
+            return
         }
+        
+        //converte para formato String
+        formatter.dateFormat = "yyyy-MM-dd"
+        let birthday = formatter.string(from: dateFormatted)
+        
+        WebService.postUser(request: SignUpRequest(fullname: fullName, email: email, password: password, document: document, phone: phone, birthday: birthday, gender: gender.index))
+        //DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            //self.uiState = .error("Usuario ja existe!")
+            //self.uiState = .sucess
+            //self.publisher.send(true)
+        //}
     }}
 
 extension SignUpViewModel {
