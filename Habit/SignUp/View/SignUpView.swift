@@ -68,8 +68,8 @@ extension SignUpView {
     var passwordField: some View {
         EditTextView( placeholder: "Password",
                       text: $viewModel.password,
-                      error: "A senha deve ter 6 caracteres!",
-                      failure: viewModel.password.count < 6,
+                      error: "A senha deve ter 8 caracteres!",
+                      failure: viewModel.password.count < 8,
                       isSecure: true)
     }
 }
@@ -83,7 +83,7 @@ extension SignUpView {
 
 extension SignUpView {
     var phoneField: some View {
-        EditTextView(placeholder: "Celular", text: $viewModel.phone, keyboard: .phonePad, error: "Use o formato XX XXXXX-XXXX", failure: viewModel.phone.count < 10 || viewModel.phone.count > 11)
+        EditTextView(placeholder: "Celular", text: $viewModel.phone, keyboard: .phonePad, error: "Entre com o DDD + 8 ou 9 dígitos", failure: viewModel.phone.count < 10 || viewModel.phone.count > 11)
     }
 }
 
