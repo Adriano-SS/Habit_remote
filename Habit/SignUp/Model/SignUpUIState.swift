@@ -2,7 +2,7 @@
 //  SignUpUIState.swift
 //  Habit
 //
-//  Created by user246507 on 9/27/23.
+//  Created by Adriano on 9/27/23.
 //
 
 import Foundation
@@ -10,6 +10,6 @@ import Foundation
 enum SignUpUIState: Equatable {
     case none
     case loading
-    case sucess
+    case success
     case error(String)
 }

@@ -2,14 +2,14 @@
 //  SplashViewRouter.swift
 //  Habit
 //
-//  Created by user246507 on 9/20/23.
+//  Created by Adriano on 9/20/23.
 //
 
 import SwiftUI
 
 enum SplashViewRouter {
     static func makeSignInView () -> some View {
-        let viewModel = SignInViewModel()
+        let viewModel = SignInViewModel(interactor: SignInInteractor())
         return SignInView(viewModel: viewModel)	
     }
     

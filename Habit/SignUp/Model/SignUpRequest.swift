@@ -2,7 +2,7 @@
 //  SignUpRequest.swift
 //  Habit
 //
-//  Created by user246507 on 10/10/23.
+//  Created by Adriano on 10/10/23.
 //
 
 import Foundation

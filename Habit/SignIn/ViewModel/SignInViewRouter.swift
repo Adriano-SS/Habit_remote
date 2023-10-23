@@ -2,7 +2,7 @@
 //  SignInViewRouter.swift
 //  Habit
 //
-//  Created by user246507 on 9/25/23.
+//  Created by Adriano on 9/25/23.
 //
 
 import SwiftUI
@@ -19,4 +19,9 @@ enum SignInViewRouter {
         viewModel.publisher = publisher
         return SignUpView(viewModel: viewModel)
     }
+    /*rota de volta do cadastro
+    static func makeItSelf () -> some View {
+        let viewModel = SignInViewModel()
+        return SignInView(viewModel: viewModel)
+    }*/
 }

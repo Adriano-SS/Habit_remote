@@ -2,7 +2,7 @@
 //  SignInView.swift
 //  Habit
 //
-//  Created by user246507 on 9/20/23.
+//  Created by Adriano on 9/20/23.
 //
 
 import SwiftUI
@@ -20,6 +20,7 @@ struct SignInView: View {
             if case SignInUIState.goToHomeScreen = viewModel.uiState {
                 viewModel.homeView()
             }
+            
             else {
                 NavigationView {
                     ScrollView(showsIndicators: false) {
@@ -53,6 +54,7 @@ struct SignInView: View {
                                     .padding(.top, 16)
                             }
                         }
+                        
                         if case SignInUIState.error(let value) = viewModel.uiState {
                             Text("")
                                 .alert(isPresented: .constant(true)){
@@ -95,8 +97,8 @@ extension SignInView {
     var passwordField: some View {
         EditTextView( placeholder: "Password",
                       text: $viewModel.password,
-                      error: "A senha deve ter 6 caracteres!",
-                      failure: viewModel.password.count < 6,
+                      error: "A senha deve ter 8 caracteres!",
+                      failure: viewModel.password.count < 8,
                       isSecure: true)
     }
 }
@@ -107,7 +109,7 @@ extension SignInView {
             action: { viewModel.login()},
             text: "Entrar",
             showProgress: self.viewModel.uiState == SignInUIState.loading,
-            disable: !viewModel.email.isEmail() || viewModel.password.count < 6
+            disable: !viewModel.email.isEmail() || viewModel.password.count < 8
             )
         }
 }
@@ -140,7 +142,7 @@ extension SignInView {
 struct SignInView_Previews: PreviewProvider {
     static var previews: some View {
         ForEach(ColorScheme.allCases, id: \.self) {
-            let viewModel = SignInViewModel()
+            let viewModel = SignInViewModel(interactor: SignInInteractor())
             SignInView(viewModel: viewModel)
                 .previewDevice("Iphone 11")
                 .preferredColorScheme($0)

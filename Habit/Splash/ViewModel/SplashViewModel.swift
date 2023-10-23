@@ -2,7 +2,7 @@
 //  SplashViewModel.swift
 //  Habit
 //
-//  Created by user246507 on 9/20/23.
+//  Created by Adriano on 9/20/23.
 //
 
 import SwiftUI
@@ -11,7 +11,7 @@ class SplashViewModel: ObservableObject {
     
     func onApperar(){
         uiState = .loading
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             //self.uiState = .error("Perda de conexao com o servidor")
             //self.uiState = .goToHomeScreen
             self.uiState = .goToSignInScreen

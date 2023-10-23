@@ -2,7 +2,7 @@
 //  SignUpViewModel.swift
 //  Habit
 //
-//  Created by user246507 on 9/20/23.
+//  Created by Adriano on 9/20/23.
 //
 
 import SwiftUI
@@ -22,6 +22,7 @@ class SignUpViewModel: ObservableObject {
     
     var publisher: PassthroughSubject<Bool, Never>!
     
+    //Utilizou-se JSON Aplication
     func signUp() {
         uiState = .loading
         
@@ -42,16 +43,47 @@ class SignUpViewModel: ObservableObject {
         formatter.dateFormat = "yyyy-MM-dd"
         let birthday = formatter.string(from: dateFormatted)
         
-        WebService.postUser(request: SignUpRequest(fullname: fullName, email: email, document: document, phone: phone, gender: gender.index, birthday: birthday, password: password))
+        WebService.postUser(request: SignUpRequest(fullname: fullName, email: email, document: document, phone: phone, gender: gender.index, birthday: birthday, password: password)) { (successResponse, errorResponse) in
+            if let error = errorResponse {
+                //Operação de segundo plano é despachada para execução principal da View.
+                DispatchQueue.main.async {
+                    self.uiState = .error(error.detail)
+                }
+            }
+            if let success = successResponse {
+                /*WebService.login(request: SignInRequest(email: self.email,
+                                                        password: self.password)) { (successResponse, errorResponse) in
+                    if let errorSignIn = errorResponse {
+                        //Operação de segundo plano é despachada para execução principal da View.
+                        DispatchQueue.main.async {
+                            self.uiState = .error(errorSignIn.detail.message)
+                        }
+                    }
+                    
+                    if let successSignIn = successResponse {
+                        DispatchQueue.main.async {
+                            print(successSignIn)
+                            self.publisher.send(success)
+                            self.uiState = .success
+                        }
+                    }
+                }*/
+            }
+        }
         //DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            //self.uiState = .error("Usuario ja existe!")
-            //self.uiState = .sucess
-            //self.publisher.send(true)
+        //self.uiState = .error("Usuario ja existe!")
+        //self.uiState = .sucess
+        //self.publisher.send(true)
         //}
-    }}
+    }
+}
 
 extension SignUpViewModel {
     func homeView() -> some View {
         return SignUpViewRouter.makeHomeView()
     }
+    
+    /*func loginView() -> some View {
+        return SignUpViewRouter.makeSingInView()
+    }*/
 }

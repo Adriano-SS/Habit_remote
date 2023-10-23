@@ -2,7 +2,7 @@
 //  SignUpView.swift
 //  Habit
 //
-//  Created by user246507 on 9/20/23.
+//  Created by Adriano on 9/20/23.
 //
 
 import SwiftUI
@@ -35,6 +35,18 @@ struct SignUpView: View {
                 .padding(.horizontal, 8)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
             }.padding()
+            
+            /*if case SignUpUIState.success(let value) = viewModel.uiState {
+                Text("")
+                    .alert(isPresented: .constant(true)){
+                        Alert(title: Text("Personal Habits"), message: Text(value), dismissButton: .default(Text("OK")){
+                            //acao ao fechar o botao
+                        })
+                    }
+                    .background(Color.green)                
+                    viewModel.loginView()
+            }*/
+            
             if case SignUpUIState.error(let value) = viewModel.uiState {
                 Text("")
                     .alert(isPresented: .constant(true)){
@@ -113,7 +125,7 @@ extension SignUpView {
             action: { viewModel.signUp()},
             text: "Realize seu cadastro",
             showProgress: self.viewModel.uiState == SignUpUIState.loading,
-            disable: !viewModel.email.isEmail() || viewModel.password.count < 6
+            disable: !viewModel.email.isEmail() || viewModel.password.count < 8
             )
     }
 }
