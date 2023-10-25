@@ -11,6 +11,9 @@ import Combine
 class SignUpViewModel: ObservableObject {
     
     @Published var uiState: SignUpUIState = .none
+    private let interactor: SignUpInteractor
+    private var cancellableSignUp: AnyCancellable?
+    private var cancellableSignIn: AnyCancellable?
     
     @Published var fullName: String = ""
     @Published var email: String = ""
@@ -22,9 +25,19 @@ class SignUpViewModel: ObservableObject {
     
     var publisher: PassthroughSubject<Bool, Never>!
     
+    
+    init(intercator: SignUpInteractor) {
+        self.interactor = intercator
+    }
+    
+    deinit{
+        cancellableSignUp?.cancel()
+        cancellableSignIn?.cancel()
+    }
+    
     //Utilizou-se JSON Aplication
     func signUp() {
-        uiState = .loading
+        self.uiState = .loading
         
         //Converte String do usuário para formato de data
         let formatter = DateFormatter()
@@ -43,38 +56,41 @@ class SignUpViewModel: ObservableObject {
         formatter.dateFormat = "yyyy-MM-dd"
         let birthday = formatter.string(from: dateFormatted)
         
-        WebService.postUser(request: SignUpRequest(fullname: fullName, email: email, document: document, phone: phone, gender: gender.index, birthday: birthday, password: password)) { (successResponse, errorResponse) in
-            if let error = errorResponse {
-                //Operação de segundo plano é despachada para execução principal da View.
-                DispatchQueue.main.async {
-                    self.uiState = .error(error.detail)
+        cancellableSignUp = interactor.postUser(signUpRequest: SignUpRequest(fullname: fullName,
+                                                         email: email,
+                                                         document: document,
+                                                         phone: phone,
+                                                         gender: gender.index,
+                                                         birthday: birthday,
+                                                         password: password))
+        .receive(on: DispatchQueue.main)
+        .sink { completion in
+            //error | finished
+            switch(completion) {
+            case .failure(let appError):
+                self.uiState = .error(appError.message)
+                break
+            case .finished:
+                break
+            }
+        } receiveValue: { created in
+            if created {
+                self.cancellableSignIn = self.interactor.login(signInRequest: SignInRequest(email: self.email, password: self.password))
+                .receive(on: DispatchQueue.main)
+                .sink { completion in
+                    switch(completion) {
+                    case .failure(let appError):
+                        break
+                    case .finished:
+                        break
+                    }
+                } receiveValue: { successSignIn in
+                    print(created)
+                    self.publisher.send(created)
+                    self.uiState = .success
                 }
             }
-            if let success = successResponse {
-                /*WebService.login(request: SignInRequest(email: self.email,
-                                                        password: self.password)) { (successResponse, errorResponse) in
-                    if let errorSignIn = errorResponse {
-                        //Operação de segundo plano é despachada para execução principal da View.
-                        DispatchQueue.main.async {
-                            self.uiState = .error(errorSignIn.detail.message)
-                        }
-                    }
-                    
-                    if let successSignIn = successResponse {
-                        DispatchQueue.main.async {
-                            print(successSignIn)
-                            self.publisher.send(success)
-                            self.uiState = .success
-                        }
-                    }
-                }*/
-            }
         }
-        //DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-        //self.uiState = .error("Usuario ja existe!")
-        //self.uiState = .sucess
-        //self.publisher.send(true)
-        //}
     }
 }
 
@@ -82,8 +98,4 @@ extension SignUpViewModel {
     func homeView() -> some View {
         return SignUpViewRouter.makeHomeView()
     }
-    
-    /*func loginView() -> some View {
-        return SignUpViewRouter.makeSingInView()
-    }*/
 }

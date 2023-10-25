@@ -121,8 +121,8 @@ extension SignUpView {
 
 extension SignUpView {
     var saveButton: some View {
-        LoadingButtonView(
-            action: { viewModel.signUp()},
+        LoadingButtonView(action: {
+            viewModel.signUp()},
             text: "Realize seu cadastro",
             showProgress: self.viewModel.uiState == SignUpUIState.loading,
             disable: !viewModel.email.isEmail() || viewModel.password.count < 8
@@ -132,7 +132,7 @@ extension SignUpView {
 struct SignUpView_Previews: PreviewProvider {
     static var previews: some View {
         ForEach(ColorScheme.allCases, id: \.self) {
-            let viewModel = SignUpViewModel()
+            let viewModel = SignUpViewModel(intercator: SignUpInteractor())
             SignUpView(viewModel: viewModel)
                 .previewDevice("Iphone 11")
                 .preferredColorScheme($0)

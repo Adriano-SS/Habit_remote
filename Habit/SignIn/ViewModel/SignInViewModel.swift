@@ -12,6 +12,7 @@ class SignInViewModel: ObservableObject {
     //A estrutura do Combine sempre é do tipo <sucesso, erro>
     private let publisher = PassthroughSubject<Bool, Never>()
     private var cancellable: AnyCancellable?
+    private var cancellableRequest: AnyCancellable?
     private let interactor: SignInInteractor
     
     @Published var uiState: SignInUIState = .none
@@ -23,7 +24,7 @@ class SignInViewModel: ObservableObject {
         self.interactor = interactor
         cancellable = publisher.sink { value in
             if value {
-                print("\(value)")
+                print("Usuário criado! goToHome: \(value)")
                 self.uiState = .goToHomeScreen
             }
         }
@@ -31,28 +32,30 @@ class SignInViewModel: ObservableObject {
     
     deinit {
         cancellable?.cancel()
+        cancellableRequest?.cancel()
     }
     //Utilizando URLEncoded
     func login() {
         self.uiState = .loading
-        interactor.login(loginRequest: SignInRequest(email: email,
-                                                password: password)) { (successResponse, errorResponse) in
-            if let error = errorResponse {
-                //Operação de segundo plano é despachada para execução principal da View.
-                DispatchQueue.main.async {
-                    self.uiState = .error(error.detail.message)
-                }
-            }
-            
-            if let success = successResponse {
-                DispatchQueue.main.async {
-                    print(success)
-                    self.uiState = .goToHomeScreen
-                }
-            }
-        }
         
-        
+        cancellableRequest = interactor.login(loginRequest: SignInRequest(email: email,
+                                                                          password: password))
+            .receive(on: DispatchQueue.main)
+            .sink { completion in
+                //Blocos para ERRO ou FINISHED
+                switch(completion) {
+                case .failure(let appError):
+                    self.uiState = SignInUIState.error(appError.message)
+                    break
+                case .finished:
+                    break
+                }
+            } receiveValue: { success in
+                //Bloco para SUCESSO
+                print(success)
+                self.uiState = .goToHomeScreen
+            }
+
         /*
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             self.uiState = .error("Usuario ou senha incorreta!")
@@ -69,9 +72,4 @@ extension SignInViewModel {
     func signUpView() -> some View {
         return SignInViewRouter.makeSignUpView(publisher: publisher)
     }
-    
-    /*func itSelfView() -> some View {
-        return SignInViewRouter.makeItSelf()
-    }*/
-    
 }
