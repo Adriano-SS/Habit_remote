@@ -11,6 +11,5 @@ enum SignInUIState: Equatable {
     case none
     case loading
     case goToHomeScreen
-    //case goToLoginScreen
     case error(String)
 }

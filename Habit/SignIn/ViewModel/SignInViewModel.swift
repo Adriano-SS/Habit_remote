@@ -52,7 +52,12 @@ class SignInViewModel: ObservableObject {
                 }
             } receiveValue: { success in
                 //Bloco para SUCESSO
-                print(success)
+                let auth = UserAuth(idToken: success.accessToken,
+                                    refreshToken: success.refreshToken,
+                                    expires: success.expires,
+                                    tokenType: success.tokenType)
+                self.interactor.insertUser(userAuth: auth)
+                
                 self.uiState = .goToHomeScreen
             }
 
