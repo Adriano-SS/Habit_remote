@@ -35,7 +35,7 @@ class SplashViewModel: ObservableObject {
             .sink { userAuth in
                 if userAuth == nil {
                     self.uiState = .goToSignInScreen
-                } else if (Date().timeIntervalSince1970 > Date().timeIntervalSince1970 + Double(userAuth!.expires)) {
+                } else if (Date().timeIntervalSince1970 > userAuth!.expires) {
                     //chamar refreshToken na API
                     print("Token Expirou")
                 }
@@ -55,12 +55,3 @@ extension SplashViewModel {
         return SplashViewRouter.makeHomeView()
     }
 }
-
-/*extension SplashViewModel{
-    func signUpView() -> some View {
-        return SplashViewRouter.makeSignUpView()
-    }
-}*/
-    
-    
-

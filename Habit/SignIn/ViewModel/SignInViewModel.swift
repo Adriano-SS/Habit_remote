@@ -54,7 +54,7 @@ class SignInViewModel: ObservableObject {
                 //Bloco para SUCESSO
                 let auth = UserAuth(idToken: success.accessToken,
                                     refreshToken: success.refreshToken,
-                                    expires: success.expires,
+                                    expires: Date().timeIntervalSince1970 + Double(success.expires),
                                     tokenType: success.tokenType)
                 self.interactor.insertUser(userAuth: auth)
                 
