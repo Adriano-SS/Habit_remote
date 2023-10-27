@@ -41,7 +41,7 @@ extension LocalDataSource {
         saveValue(value: userAuth)
     }
     
-    func getUser() -> Future<UserAuth?, Never> {
+    func getUserAuth() -> Future<UserAuth?, Never> {
         let userAuth = readValue(forKey: "user_key")
         return Future { promise in
             promise(.success(userAuth))

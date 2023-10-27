@@ -6,16 +6,43 @@
 //
 
 import SwiftUI
+import Combine
+
 class SplashViewModel: ObservableObject {
     @Published var uiState: SplashUIState = .loading
     
+    
+    private var cancellableAuth: AnyCancellable?
+    
+    private let interactor: SplashInteractor
+        
+    @Published var email: String = ""
+    @Published var password: String = ""
+    
+    init(interactor: SplashInteractor) {
+        self.interactor = interactor
+    }
+    
+    deinit {
+        cancellableAuth?.cancel()
+    }
+    
     func onApperar(){
-        uiState = .loading
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            //self.uiState = .error("Perda de conexao com o servidor")
-            //self.uiState = .goToHomeScreen
-            self.uiState = .goToSignInScreen
-        }
+        self.uiState = .loading
+        cancellableAuth = interactor.fecthAuth()
+            .delay(for: .seconds(2), scheduler: RunLoop.main)
+            .receive(on: DispatchQueue.main)
+            .sink { userAuth in
+                if userAuth == nil {
+                    self.uiState = .goToSignInScreen
+                } else if (Date().timeIntervalSince1970 > Date().timeIntervalSince1970 + Double(userAuth!.expires)) {
+                    //chamar refreshToken na API
+                    print("Token Expirou")
+                }
+                else {
+                    self.uiState = .goToHomeScreen
+                }
+            }
     }
 }
 

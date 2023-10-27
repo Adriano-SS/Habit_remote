@@ -20,5 +20,5 @@ extension SignInInteractor {
     
     func insertUser(userAuth: UserAuth) {
         local.insertUserAuth(userAuth: userAuth)
-    }
+    }    
 }
