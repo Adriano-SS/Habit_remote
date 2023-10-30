@@ -16,6 +16,8 @@
 		B939173D2AE1606A00A82FE5 /* SignInRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B939173C2AE1606A00A82FE5 /* SignInRequest.swift */; };
 		B939173F2AE161C800A82FE5 /* SignInResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B939173E2AE161C800A82FE5 /* SignInResponse.swift */; };
 		B9483F842AEBE550004B2EF4 /* SplashInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9483F832AEBE550004B2EF4 /* SplashInteractor.swift */; };
+		B9984F132AEFDD5A003B8E84 /* RefreshRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9984F122AEFDD5A003B8E84 /* RefreshRequest.swift */; };
+		B9984F152AEFE2A2003B8E84 /* SplashRemoteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9984F142AEFE2A2003B8E84 /* SplashRemoteDataSource.swift */; };
 		B9BABE4E2AE006410037B952 /* ErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9BABE4D2AE006410037B952 /* ErrorResponse.swift */; };
 		B9C745BB2AE2A55B008B86BE /* SignInErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9C745BA2AE2A55B008B86BE /* SignInErrorResponse.swift */; };
 		B9EB09492AE7EEDF009B6F66 /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9EB09482AE7EEDF009B6F66 /* AppError.swift */; };
@@ -55,6 +57,8 @@
 		B939173C2AE1606A00A82FE5 /* SignInRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInRequest.swift; sourceTree = "<group>"; };
 		B939173E2AE161C800A82FE5 /* SignInResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInResponse.swift; sourceTree = "<group>"; };
 		B9483F832AEBE550004B2EF4 /* SplashInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashInteractor.swift; sourceTree = "<group>"; };
+		B9984F122AEFDD5A003B8E84 /* RefreshRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshRequest.swift; sourceTree = "<group>"; };
+		B9984F142AEFE2A2003B8E84 /* SplashRemoteDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashRemoteDataSource.swift; sourceTree = "<group>"; };
 		B9BABE4D2AE006410037B952 /* ErrorResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorResponse.swift; sourceTree = "<group>"; };
 		B9C745BA2AE2A55B008B86BE /* SignInErrorResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInErrorResponse.swift; sourceTree = "<group>"; };
 		B9EB09482AE7EEDF009B6F66 /* AppError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppError.swift; sourceTree = "<group>"; };
@@ -118,6 +122,7 @@
 			isa = PBXGroup;
 			children = (
 				B9483F832AEBE550004B2EF4 /* SplashInteractor.swift */,
+				B9984F142AEFE2A2003B8E84 /* SplashRemoteDataSource.swift */,
 			);
 			path = Interactor;
 			sourceTree = "<group>";
@@ -351,6 +356,7 @@
 			isa = PBXGroup;
 			children = (
 				BC6734E92AB746200076461A /* SplashUIState.swift */,
+				B9984F122AEFDD5A003B8E84 /* RefreshRequest.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -442,6 +448,7 @@
 				BCE75CC92AC9D13500CE6BFF /* String+Extension.swift in Sources */,
 				BCC8E6572AC4E36500AE7059 /* SignUpViewRouter.swift in Sources */,
 				B9163EF12AE6A4B9008B4EEE /* SignInRemoteDataSource.swift in Sources */,
+				B9984F152AEFE2A2003B8E84 /* SplashRemoteDataSource.swift in Sources */,
 				B9052EF42AE93E5B008BC5A1 /* SignUpRemoteDataSource.swift in Sources */,
 				B9163EEF2AE69F59008B4EEE /* SignInInteractor.swift in Sources */,
 				BCC8E6552AC4E01700AE7059 /* SignUpUIState.swift in Sources */,
@@ -455,6 +462,7 @@
 				BCA745CD2ABBD5F90083A5F3 /* SignUpViewModel.swift in Sources */,
 				BCA745CB2ABBD59A0083A5F3 /* SignUpView.swift in Sources */,
 				BC3FEB422AC25BBE0097AA35 /* HomeViewModel.swift in Sources */,
+				B9984F132AEFDD5A003B8E84 /* RefreshRequest.swift in Sources */,
 				BC8F29A52ABB1BED006088B2 /* SplashViewModel.swift in Sources */,
 				BC3FEB402AC25B4C0097AA35 /* HomeView.swift in Sources */,
 				B9BABE4E2AE006410037B952 /* ErrorResponse.swift in Sources */,

@@ -13,6 +13,7 @@ class SplashViewModel: ObservableObject {
     
     
     private var cancellableAuth: AnyCancellable?
+    private var cancellableRefresh: AnyCancellable?
     
     private let interactor: SplashInteractor
         
@@ -25,6 +26,7 @@ class SplashViewModel: ObservableObject {
     
     deinit {
         cancellableAuth?.cancel()
+        cancellableRefresh?.cancel()
     }
     
     func onApperar(){
@@ -37,6 +39,26 @@ class SplashViewModel: ObservableObject {
                     self.uiState = .goToSignInScreen
                 } else if (Date().timeIntervalSince1970 > userAuth!.expires) {
                     //chamar refreshToken na API
+                    let request = RefreshRequest(token: userAuth!.refreshToken)
+                    self.cancellableRefresh = self.interactor.refreshToken(refreshRequest: request)
+                        .receive(on: DispatchQueue.main)
+                        .sink(receiveCompletion: { completion in
+                            switch(completion) {
+                            case .failure(_):
+                                self.uiState = .goToSignInScreen
+                                break
+                            default:
+                                break
+                            }
+                        }, receiveValue: { success in
+                            let auth = UserAuth(idToken: success.accessToken,
+                                                refreshToken: success.refreshToken,
+                                                expires:
+                                                    Date().timeIntervalSince1970 + Double(success.expires),
+                                                tokenType: success.tokenType)
+                            self.interactor.insertUser(userAuth: auth)
+                            self.uiState = .goToHomeScreen
+                        })
                     print("Token Expirou")
                 }
                 else {
