@@ -38,6 +38,11 @@ struct HomeView: View {
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView(viewModel: HomeViewModel())
+        ForEach(ColorScheme.allCases, id: \.self) {
+            HomeView(viewModel: HomeViewModel())
+                .previewDevice("Iphone 11")
+                .preferredColorScheme($0)
+        }
+        
     }
 }
