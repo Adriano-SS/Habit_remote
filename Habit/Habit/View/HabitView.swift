@@ -36,17 +36,35 @@ struct HabitView: View {
                                     Text("Nenhum Hábito Cadastrado :(")
                                 }
                             }
-                            else if case HabitIUState.fullList = viewModel.uiState {
-                                //fullList
+                            else if case HabitIUState.fullList(let rows) = viewModel.uiState {
+                                LazyVStack {
+                                    ForEach(rows,
+                                            content: HabitCardView.init(viewModel:))
+                                    
+                                }.padding(.horizontal, 12)
                             }
-                            else if case HabitIUState.error("") = viewModel.uiState {
-                                //Error
+                            else if case HabitIUState.error(let msg) = viewModel.uiState {
+                                Text("")
+                                    .alert(isPresented: .constant(true)) {
+                                        Alert(
+                                            title: Text("Ops! \(msg)"),
+                                            message: Text("Tentar novamente?"),
+                                            primaryButton: .default(Text("Sim")) {
+                                                viewModel.onAppear()
+                                            },
+                                            secondaryButton: .cancel()
+                                        )
+                                    }
                             }
                         }
                     }.navigationTitle("Meus Hábitos")
                 }
             }
+        }.onAppear {
+            viewModel.onAppear()
+                
         }
+        
     }
 }
 
