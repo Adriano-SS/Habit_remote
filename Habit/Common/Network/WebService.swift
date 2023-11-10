@@ -14,6 +14,7 @@ enum WebService {
         case postuser = "/users"
         case login = "/auth/login"
         case refreshToken = "/auth/refresh-token"
+        case habits = "/users/me/habits"
     }
     
     enum Result {
@@ -119,6 +120,17 @@ enum WebService {
              method: method,
              contentType: .formUrl,
              data: components?.query?.data(using: .utf8),
+             completion: completion)
+    }
+    
+    public static func call(path: Endpoint,
+                        method: Method = .get,
+                        completion: @escaping (Result) -> Void) {
+                
+        call(path: path,
+             method: method,
+             contentType: .json,
+             data: nil,
              completion: completion)
     }
 }
