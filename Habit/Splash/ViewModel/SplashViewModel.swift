@@ -10,7 +10,7 @@ import Combine
 
 class SplashViewModel: ObservableObject {
     @Published var uiState: SplashUIState = .loading
-    
+    let viewModel = HomeViewModel()
     
     private var cancellableAuth: AnyCancellable?
     private var cancellableRefresh: AnyCancellable?
@@ -74,6 +74,6 @@ extension SplashViewModel {
     }
     
     func homeView() -> some View {
-        return SplashViewRouter.makeHomeView()
+        return SplashViewRouter.makeHomeView(viewModel: viewModel)
     }
 }

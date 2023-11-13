@@ -61,9 +61,9 @@ struct HabitView: View {
                 }
             }
         }.onAppear {
-            //if !viewModel.opened{
+            if !viewModel.opened {
                 viewModel.onAppear()
-            //}
+            }
         }
         
     }

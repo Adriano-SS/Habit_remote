@@ -15,16 +15,14 @@ class HabitRemoteDataSource {
     }
     
     func fetchHabits() -> Future<[HabitResponse], AppError> {
-        return Future { promise in
+        return Future<[HabitResponse], AppError> { promise in
             WebService.call(path: .habits, method: .get) { result in
                 switch result {
                 case .failure(_, let data):
                     if let data = data {
                         let decoder = JSONDecoder()
-                        //SignInErrorResponse
-                        //response?.detail.mesage
-                        let response = try? decoder.decode(ErrorResponse.self, from: data)
-                        promise(.failure(AppError.response(message: response?.detail
+                        let response = try? decoder.decode(SignInErrorResponse.self, from: data)
+                        promise(.failure(AppError.response(message: response?.detail.message
                                                            ?? "Erro no servidor")))
                     }
                     break
@@ -36,7 +34,7 @@ class HabitRemoteDataSource {
                         return
                     }
                     promise(.success(res))
-                    return
+                    break
                 }
             }
         }
