@@ -15,6 +15,7 @@ enum WebService {
         case login = "/auth/login"
         case refreshToken = "/auth/refresh-token"
         case habits = "/users/me/habits"
+        case habitValues = "/users/me/habits/%d/values"
     }
     
     enum Result {
@@ -42,12 +43,12 @@ enum WebService {
         case delete
     }
     
-    private static func completeUrl(path: Endpoint) -> URLRequest? {
-        guard let url = URL(string: "\(Endpoint.base.rawValue)\(path.rawValue)") else {return nil}
+    private static func completeUrl(path: String) -> URLRequest? {
+        guard let url = URL(string: "\(Endpoint.base.rawValue)\(path)") else {return nil}
         return URLRequest(url: url)
     }
     
-    private static func call(path: Endpoint,
+    private static func call(path: String,
                              method: Method,
                              contentType: ContentType,
                              data: Data?,
@@ -102,6 +103,16 @@ enum WebService {
         
         guard let jsonData = try? JSONEncoder().encode(body) else { return }
         
+        call(path: path.rawValue, method: method, contentType: .json, data: jsonData, completion: completion)
+    }
+    
+    public static func call<T: Encodable>(path: String,
+                                          method: Method = .post,
+                                          body: T,
+                                          completion: @escaping (Result) -> Void) {
+        
+        guard let jsonData = try? JSONEncoder().encode(body) else { return }
+        
         call(path: path, method: method, contentType: .json, data: jsonData, completion: completion)
     }
     
@@ -110,13 +121,13 @@ enum WebService {
                             params: [URLQueryItem],
                             completion: @escaping (Result) -> Void) {
         
-        guard let urlRequest = completeUrl(path: path) else { return}
+        guard let urlRequest = completeUrl(path: path.rawValue) else { return}
         guard let absoluteURL = urlRequest.url?.absoluteString else {return}
         
         var components = URLComponents(string: absoluteURL)
         components?.queryItems = params
         
-        call(path: path,
+        call(path: path.rawValue,
              method: method,
              contentType: .formUrl,
              data: components?.query?.data(using: .utf8),
@@ -127,7 +138,7 @@ enum WebService {
                         method: Method = .get,
                         completion: @escaping (Result) -> Void) {
                 
-        call(path: path,
+        call(path: path.rawValue,
              method: method,
              contentType: .json,
              data: nil,
