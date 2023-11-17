@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 struct HabitCardView: View {
     
@@ -89,8 +90,25 @@ struct HabitCardView_Previews: PreviewProvider {
             
             NavigationView {
                 List {
-                    HabitCardView(viewModel: HabitCardViewModel(id: 1, icon: "https://placehold.co/150x150/png", date: "01/11/2023 09:44:00", name: "Estudar Swift", label: "horas", value: "2", state: .green))
-                    HabitCardView(viewModel: HabitCardViewModel(id: 2, icon: "https://placehold.co/150x150/png", date: "01/11/2023 09:44:00", name: "Estudar Swift", label: "horas", value: "1", state: .green))
+                    HabitCardView(viewModel: HabitCardViewModel(
+                        id: 1,
+                        icon: "https://placehold.co/150x150/png",
+                        date: "01/11/2023 09:44:00",
+                        name: "Estudar Swift",
+                        label: "horas",
+                        value: "2",
+                        state: .green,
+                        habitPublisher: PassthroughSubject<Bool, Never>()))
+                    
+                    HabitCardView(viewModel: HabitCardViewModel(
+                        id: 2,
+                        icon: "https://placehold.co/150x150/png",
+                        date: "01/11/2023 09:44:00",
+                        name: "Estudar Swift",
+                        label: "horas",
+                        value: "1",
+                        state: .green,
+                        habitPublisher: PassthroughSubject<Bool, Never>()))
                 }
                 .frame(maxWidth: .infinity)
                 .navigationTitle("Testando")

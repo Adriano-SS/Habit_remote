@@ -64,7 +64,6 @@ struct HabitDetailView: View {
         }
         .padding(.horizontal, 8)
         .padding(.top, 32)
-        
     }
 }
 
