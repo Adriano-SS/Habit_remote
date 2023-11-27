@@ -101,9 +101,24 @@ struct ProfileView: View {
                         }
                     }
                     .navigationBarTitle(Text("Editar Perfil"), displayMode: .automatic)
-                    .navigationBarItems(trailing: Button(action: {}, label: {Image(systemName: "checkmark")
-                            .foregroundColor(.orange)
+                    .navigationBarItems(trailing: Button(action: {
+                        viewModel.updateUser()
+                    }, label: {
+                        if case ProfileUIState.updateLoading = viewModel.uiState {
+                            ProgressView()
+                        } else {
+                            Image(systemName: "checkmark")
+                                .foregroundColor(.orange)
+                        }
+                        
                     })
+                        .alert(isPresented: .constant(viewModel.uiState == .updateSuccess)) {
+                            Alert(
+                                title: Text("Personal Habits"),
+                                message: Text("Dados atualizados com sucesso"),
+                                dismissButton: .default(Text("OK")){
+                            })
+                        }
                         .opacity(disable ? 0 : 1)
                     )
                 }
@@ -120,6 +135,20 @@ struct ProfileView: View {
                     }
                     .background(Color.red)
             }
+            
+            if case ProfileUIState.updateError(let error) = viewModel.uiState {
+                Text("")
+                    .alert(isPresented: .constant(true)){
+                        Alert(
+                            title: Text("Personal Habits"),
+                            message: Text(error),
+                            dismissButton: .default(Text("OK")){
+                                viewModel.uiState = .none
+                        })
+                    }
+                    .background(Color.red)
+            }
+            
         }.onAppear(perform: viewModel.fetchUser)
         
         
