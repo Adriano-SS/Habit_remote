@@ -9,7 +9,7 @@ import SwiftUI
 
 class HomeViewModel: ObservableObject {
     let viewModel = HabitViewModel(intercator: HabitInteractor())
-    let profileViewModel = ProfileViewModel()
+    let profileViewModel = ProfileViewModel(interactor: ProfileInteractor())
     
 }
 
