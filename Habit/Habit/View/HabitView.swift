@@ -20,13 +20,15 @@ struct HabitView: View {
                 NavigationView {
                     ScrollView(showsIndicators: false){
                         VStack(spacing: 12) {
-                            topContainer
-                                                        
-                            addButton
                             
-                            Spacer(minLength: 60)
+                            if !viewModel.isCharts {
+                                topContainer
+                                
+                                addButton
+                            }
                             
                             if case HabitIUState.emptyList = viewModel.uiState {
+                                Spacer(minLength: 60)
                                 VStack {
                                     Image(systemName: "exclamationmark.bubble")
                                         .resizable()
@@ -38,9 +40,9 @@ struct HabitView: View {
                             }
                             else if case HabitIUState.fullList(let rows) = viewModel.uiState {
                                 LazyVStack {
-                                    ForEach(rows,
-                                            content: HabitCardView.init(viewModel:))
-                                    
+                                    ForEach(rows) { row in
+                                        HabitCardView(isChart: viewModel.isCharts, viewModel: row)
+                                    }
                                 }.padding(.horizontal, 12)
                             }
                             else if case HabitIUState.error(let msg) = viewModel.uiState {
@@ -95,7 +97,7 @@ extension HabitView {
         .frame(maxWidth: .infinity)
         .padding(.vertical, 32)
         .overlay(RoundedRectangle(cornerRadius: 6)
-                    .stroke(Color.gray, lineWidth: 2)
+            .stroke(Color.gray, lineWidth: 2)
         )
         .padding(.horizontal, 16)
         .padding(.top, 16)
@@ -117,7 +119,7 @@ extension HabitView {
 struct HabitView_Previews: PreviewProvider {
     static var previews: some View {
         ForEach(ColorScheme.allCases, id: \.self) {
-            HomeViewRouter.makeHabitView(viewModel: HabitViewModel(intercator: HabitInteractor()))
+            HomeViewRouter.makeHabitView(viewModel: HabitViewModel(isCharts: false, intercator: HabitInteractor()))
                 .previewDevice("Iphone 11")
                 .preferredColorScheme($0)
         }

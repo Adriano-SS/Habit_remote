@@ -12,19 +12,24 @@ import SwiftUI
 class HabitViewModel: ObservableObject {
     
     @Published var uiState: HabitIUState = .loading
+    
     @Published var title: String = ""
     @Published var headline: String = ""
     @Published var description: String = ""
+    
     @Published var opened = false
     
     private let interactor: HabitInteractor
+    let isCharts: Bool
+    
     private var cancellableRequest: AnyCancellable?
     private var cancellableNotify: AnyCancellable?
     
     
     private let habitPublisher = PassthroughSubject<Bool, Never>()
     
-    init(intercator: HabitInteractor) {
+    init(isCharts: Bool, intercator: HabitInteractor) {
+        self.isCharts = isCharts
         self.interactor = intercator
         cancellableNotify = habitPublisher.sink(receiveValue: { saved in
             print("saved: \(saved)")

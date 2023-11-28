@@ -32,4 +32,8 @@ extension HabitCardViewModel {
             name: name,
             label: label, habitPublisher: habitPublisher)
     }
+    
+    func chartView() -> some View {
+        return HabitCardViewRouter.makeChartView(id: id)
+    }
 }

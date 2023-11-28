@@ -10,19 +10,31 @@ import Combine
 
 struct HabitCardView: View {
     
+    let isChart: Bool
     let viewModel: HabitCardViewModel
     @State private var action: Bool = false
     
     var body: some View {
         
         ZStack(alignment: .trailing) {
-            NavigationLink(
-                destination: viewModel.habitDetailView(),
-                isActive: self.$action,
-                label: {
-                    EmptyView()
-                }
-            )
+            if isChart {
+                NavigationLink(
+                    destination: viewModel.chartView(),
+                    isActive: self.$action,
+                    label: {
+                        EmptyView()
+                    }
+                )
+            } else {
+                NavigationLink(
+                    destination: viewModel.habitDetailView(),
+                    isActive: self.$action,
+                    label: {
+                        EmptyView()
+                    }
+                )
+            }
+            
             
             Button(
                 action: {
@@ -30,7 +42,6 @@ struct HabitCardView: View {
                 }, label: {
                     HStack {
                         Image(systemName: "pencil")
-                            //.padding(.horizontal, 4)
                             .foregroundColor(.black)
                         
                         HStack(alignment: .top) {
@@ -70,9 +81,12 @@ struct HabitCardView: View {
                     .padding()
                     .cornerRadius(4)
                 })
-            Rectangle()
-                .frame(width: 8)
-                .foregroundColor(viewModel.state)
+            if !isChart {
+                Rectangle()
+                    .frame(width: 8)
+                    .foregroundColor(viewModel.state)
+            }
+            
         }
         .background(
         RoundedRectangle(cornerRadius: 4)
@@ -90,7 +104,7 @@ struct HabitCardView_Previews: PreviewProvider {
             
             NavigationView {
                 List {
-                    HabitCardView(viewModel: HabitCardViewModel(
+                    HabitCardView(isChart: false, viewModel: HabitCardViewModel(
                         id: 1,
                         icon: "https://placehold.co/150x150/png",
                         date: "01/11/2023 09:44:00",
@@ -100,7 +114,7 @@ struct HabitCardView_Previews: PreviewProvider {
                         state: .green,
                         habitPublisher: PassthroughSubject<Bool, Never>()))
                     
-                    HabitCardView(viewModel: HabitCardViewModel(
+                    HabitCardView(isChart: true, viewModel: HabitCardViewModel(
                         id: 2,
                         icon: "https://placehold.co/150x150/png",
                         date: "01/11/2023 09:44:00",
