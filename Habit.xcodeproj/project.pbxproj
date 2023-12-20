@@ -33,11 +33,12 @@
 		B98EEF622B2205E300F107A8 /* ChartRemoteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98EEF612B2205E300F107A8 /* ChartRemoteDataSource.swift */; };
 		B98EEF642B2208CB00F107A8 /* ChartInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98EEF632B2208CB00F107A8 /* ChartInteractor.swift */; };
 		B98EEF662B2209B700F107A8 /* ChartUIState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98EEF652B2209B700F107A8 /* ChartUIState.swift */; };
-		B98EEF682B220AB400F107A8 /* BoxChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98EEF672B220AB400F107A8 /* BoxChartView.swift */; };
+		B98EEF682B220AB400F107A8 /* LineChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98EEF672B220AB400F107A8 /* LineChartView.swift */; };
 		B98F42892B025C8400FFF7E9 /* HabitDetailUIState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98F42882B025C8400FFF7E9 /* HabitDetailUIState.swift */; };
 		B98F428B2B025D2000FFF7E9 /* HabitDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98F428A2B025D2000FFF7E9 /* HabitDetailViewModel.swift */; };
 		B98F428D2B025EA100FFF7E9 /* HabitDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98F428C2B025EA100FFF7E9 /* HabitDetailView.swift */; };
 		B9906AD22B16134E008C36D8 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9906AD12B16134E008C36D8 /* ChartView.swift */; };
+		B99676922B331E9D003EFFE2 /* BarChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B99676912B331E9D003EFFE2 /* BarChartView.swift */; };
 		B9984F132AEFDD5A003B8E84 /* RefreshRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9984F122AEFDD5A003B8E84 /* RefreshRequest.swift */; };
 		B9984F152AEFE2A2003B8E84 /* SplashRemoteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9984F142AEFE2A2003B8E84 /* SplashRemoteDataSource.swift */; };
 		B9AB87112B039C030041C33C /* HabitCardViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9AB87102B039C030041C33C /* HabitCardViewRouter.swift */; };
@@ -108,11 +109,12 @@
 		B98EEF612B2205E300F107A8 /* ChartRemoteDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartRemoteDataSource.swift; sourceTree = "<group>"; };
 		B98EEF632B2208CB00F107A8 /* ChartInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartInteractor.swift; sourceTree = "<group>"; };
 		B98EEF652B2209B700F107A8 /* ChartUIState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartUIState.swift; sourceTree = "<group>"; };
-		B98EEF672B220AB400F107A8 /* BoxChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxChartView.swift; sourceTree = "<group>"; };
+		B98EEF672B220AB400F107A8 /* LineChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineChartView.swift; sourceTree = "<group>"; };
 		B98F42882B025C8400FFF7E9 /* HabitDetailUIState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitDetailUIState.swift; sourceTree = "<group>"; };
 		B98F428A2B025D2000FFF7E9 /* HabitDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitDetailViewModel.swift; sourceTree = "<group>"; };
 		B98F428C2B025EA100FFF7E9 /* HabitDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitDetailView.swift; sourceTree = "<group>"; };
 		B9906AD12B16134E008C36D8 /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
+		B99676912B331E9D003EFFE2 /* BarChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarChartView.swift; sourceTree = "<group>"; };
 		B9984F122AEFDD5A003B8E84 /* RefreshRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshRequest.swift; sourceTree = "<group>"; };
 		B9984F142AEFE2A2003B8E84 /* SplashRemoteDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashRemoteDataSource.swift; sourceTree = "<group>"; };
 		B9AB87102B039C030041C33C /* HabitCardViewRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitCardViewRouter.swift; sourceTree = "<group>"; };
@@ -329,7 +331,8 @@
 			isa = PBXGroup;
 			children = (
 				B9906AD12B16134E008C36D8 /* ChartView.swift */,
-				B98EEF672B220AB400F107A8 /* BoxChartView.swift */,
+				B98EEF672B220AB400F107A8 /* LineChartView.swift */,
+				B99676912B331E9D003EFFE2 /* BarChartView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -716,6 +719,7 @@
 				B9C745BB2AE2A55B008B86BE /* SignInErrorResponse.swift in Sources */,
 				B9AB87132B03A4640041C33C /* HabitValueRequest.swift in Sources */,
 				BC3FEB3A2AC25A3F0097AA35 /* SignInViewRouter.swift in Sources */,
+				B99676922B331E9D003EFFE2 /* BarChartView.swift in Sources */,
 				B98EEF5B2B21F04E00F107A8 /* ChartViewModel.swift in Sources */,
 				BCBDF7222AB63A8F00394C2F /* HabitApp.swift in Sources */,
 				B98EEF5F2B21FA5B00F107A8 /* DataForCharts.swift in Sources */,
@@ -727,7 +731,7 @@
 				BCC8E6572AC4E36500AE7059 /* SignUpViewRouter.swift in Sources */,
 				B9163EF12AE6A4B9008B4EEE /* SignInRemoteDataSource.swift in Sources */,
 				B9984F152AEFE2A2003B8E84 /* SplashRemoteDataSource.swift in Sources */,
-				B98EEF682B220AB400F107A8 /* BoxChartView.swift in Sources */,
+				B98EEF682B220AB400F107A8 /* LineChartView.swift in Sources */,
 				B9AB87112B039C030041C33C /* HabitCardViewRouter.swift in Sources */,
 				B98D46712B14C77D0042CEB0 /* ProfileResponse.swift in Sources */,
 				B9052EF42AE93E5B008BC5A1 /* SignUpRemoteDataSource.swift in Sources */,
