@@ -104,3 +104,9 @@ class HabitViewModel: ObservableObject {
             })
     }
 }
+
+extension HabitViewModel {
+    func habitCreateView() -> some View{
+        return HabitViewRouter.makeHabitCreatelView(habitPublisher: habitPublisher)
+    }
+}

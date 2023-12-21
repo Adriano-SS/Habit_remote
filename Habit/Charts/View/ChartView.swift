@@ -13,6 +13,7 @@ struct ChartView: View {
     enum TypeChart: String, CaseIterable, Identifiable {
         case line = "Linha"
         case bar = "Barra"
+        case area = "Area"
         
         var id: Self { return self }
     }
@@ -61,13 +62,15 @@ struct ChartView: View {
                                 Text("Choose your chart type:")
                             }
                             .pickerStyle(.segmented)
-                            Spacer()
+                            .padding(.bottom, 12)
                             Group {
                                 switch selectedTypeChart {
                                     case .line:
                                         LineChartView(entries: $viewModel.entries)
                                     case .bar:
                                         BarChartView(entries: $viewModel.entries)
+                                    case .area:
+                                        AreaChartView(entries: $viewModel.entries)
                                 }
                             }
                             .aspectRatio(1, contentMode: .fit)
