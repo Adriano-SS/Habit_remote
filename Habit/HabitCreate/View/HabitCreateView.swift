@@ -29,7 +29,7 @@ struct HabitCreateView: View {
                 Button(action: {
                     shouldPresentedCamera = true
                 }, label: {
-                    Image(systemName: "camera.fill")
+                    viewModel.image
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 100, height: 100)
@@ -92,7 +92,7 @@ struct HabitCreateView: View {
 struct HabitCreateView_Previews: PreviewProvider {
     static var previews: some View {
         ForEach(ColorScheme.allCases, id: \.self) {
-            HabitCreateView(viewModel: HabitCreateViewModel(interactor: HabitDetailInteractor()))
+            HabitCreateView(viewModel: HabitCreateViewModel(interactor: HabitCreateInteractor()))
                 .previewDevice("Iphone 11")
                 .preferredColorScheme($0)
         }

@@ -86,6 +86,10 @@ enum WebService {
                             break
                         case 200:
                             completion(.success(data))
+                            break
+                        case 201:
+                            completion(.success(data))
+                            break
                         default:
                             break
                         }
