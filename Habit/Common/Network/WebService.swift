@@ -36,6 +36,7 @@ enum WebService {
     enum ContentType: String {
         case json = "application/json"
         case formUrl = "application/x-www-form-urlencoded"
+        case multipart = "multipart/form-data"
     }
     
     enum Method: String {
@@ -50,10 +51,12 @@ enum WebService {
         return URLRequest(url: url)
     }
     
+    //chamada secundaria geral
     private static func call(path: String,
                              method: Method,
                              contentType: ContentType,
                              data: Data?,
+                             boundary: String = "",
                              completion: @escaping (Result) -> Void) {
         
         guard var urlRequest = completeUrl(path: path) else { return}
@@ -63,14 +66,21 @@ enum WebService {
                 if let userAuth = userAuth {
                     urlRequest.setValue("\(userAuth.tokenType) \(userAuth.idToken)", forHTTPHeaderField: "Authorization")
                 }
+                
+                if contentType == .multipart {
+                    urlRequest.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+                } else {
+                    urlRequest.setValue(contentType.rawValue, forHTTPHeaderField: "Content-Type")
+
+                }
+                
                 urlRequest.httpMethod = method.rawValue
                 urlRequest.setValue("application/json", forHTTPHeaderField: "accept")
-                urlRequest.setValue(contentType.rawValue, forHTTPHeaderField: "Content-Type")
                 urlRequest.httpBody = data
                 
                 let task = URLSession.shared.dataTask(with: urlRequest) { data, response, error in
                     guard let data = data, error == nil else {
-                        print(error)
+                        print(error as Any)
                         completion(.failure(.internalServerError, nil))
                         return
                     }
@@ -94,9 +104,9 @@ enum WebService {
                             break
                         }
                     }
-                    print(String(data: data, encoding: .utf8))
+                    print(String(data: data, encoding: .utf8) as Any)
                     print("Response:\n")
-                    print(response)
+                    print(response as Any)
                 }
                 task.resume()
             }
@@ -132,20 +142,54 @@ enum WebService {
     public static func call(path: Endpoint,
                             method: Method = .post,
                             params: [URLQueryItem],
+                            data: Data? = nil,
                             completion: @escaping (Result) -> Void) {
         
-        guard let urlRequest = completeUrl(path: path.rawValue) else { return}
-        guard let absoluteURL = urlRequest.url?.absoluteString else {return}
+        guard let urlRequest = completeUrl(path: path.rawValue) else { return }
+        guard let absoluteURL = urlRequest.url?.absoluteString else { return }
         
         var components = URLComponents(string: absoluteURL)
         components?.queryItems = params
         
+        let boundary = "Boundary-\(NSUUID().uuidString)"
+        
         call(path: path.rawValue,
              method: method,
-             contentType: .formUrl,
-             data: components?.query?.data(using: .utf8),
+             contentType: data != nil ? .multipart : .formUrl,
+             data: data != nil ? createBodyWithParameters(
+                params: params,
+                data: data!,
+                boundary: boundary)
+                : components?.query?.data(using: .utf8),
+             boundary: boundary,
              completion: completion)
     }
+    
+    private static func createBodyWithParameters(
+        params: [URLQueryItem],
+        data: Data,
+        boundary: String) -> Data {
+            let body = NSMutableData()
+            let filename =  "img.jpg"
+            let mimetype = "image/jpeg"
+            
+            for param in params {
+                body.appendString("--\(boundary)\r\n")
+                body.appendString("Content-Disposition: form-data; name=\"\(param.name)\"\r\n\r\n")
+                body.appendString("\(param.value!)\r\n")
+            }
+            
+            body.appendString("--\(boundary)\r\n")
+            body.appendString("Content-Disposition: form-data; name=\"file\"; filename=\"\(filename)\"\r\n")
+            body.appendString("Content-Type: \(mimetype)\r\n\r\n")
+            body.append(data)
+            body.appendString("\r\n")
+
+            body.appendString("--\(boundary)--\r\n")
+
+
+            return body as Data
+        }
     
     public static func call(path: Endpoint,
                         method: Method = .get,
@@ -156,5 +200,11 @@ enum WebService {
              contentType: .json,
              data: nil,
              completion: completion)
+    }
+}
+
+extension NSMutableData {
+    func appendString(_ string: String) {
+        append(string.data(using: .utf8, allowLossyConversion: true)!)
     }
 }

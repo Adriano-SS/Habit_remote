@@ -34,7 +34,7 @@ class SplashRemoteDataSource {
                     let response = try? decoder.decode(SignInResponse.self, from: data)
                     //completion(response, nil)
                     guard let response = response else {
-                        print("Log: Error parser \(String(data: data, encoding: .utf8))")
+                        print("Log: Error parser \(String(describing: String(data: data, encoding: .utf8)))")
                         return
                     }
                     promise(.success(response))

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SignInView: View {
-    @ObservedObject var viewModel: SignInViewModel    
+    @ObservedObject var viewModel: SignInViewModel
     
     //variavel desnecessaria com navigationLink(value, label)
     //@State var action: Int? = 0

@@ -79,7 +79,7 @@ class SignUpViewModel: ObservableObject {
                 .receive(on: DispatchQueue.main)
                 .sink { completion in
                     switch(completion) {
-                    case .failure(let appError):
+                    case .failure(_):
                         break
                     case .finished:
                         break
@@ -107,3 +107,4 @@ extension SignUpViewModel {
         return SignUpViewRouter.makeHomeView()
     }
 }
+

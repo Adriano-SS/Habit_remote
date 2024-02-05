@@ -6,13 +6,11 @@
 //
 
 import SwiftUI
+import Combine
 
 class SignUpViewRouter {
     static func makeHomeView() -> some View {
         let viewModel = HomeViewModel()
         return HomeView(viewModel: viewModel)
     }
-    /*static func makeSingInView() -> some View {
-        return SignInView(viewModel: SignInViewModel())
-    }*/
 }

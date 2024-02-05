@@ -29,7 +29,7 @@ class SplashViewModel: ObservableObject {
         cancellableRefresh?.cancel()
     }
     
-    func onApperar(){
+    func onApperar() {
         self.uiState = .loading
         cancellableAuth = interactor.fecthAuth()
             .delay(for: .seconds(2), scheduler: RunLoop.main)
