@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import PhotosUI
 
 struct HabitCreateView: View {
     @ObservedObject var viewModel: HabitCreateViewModel
@@ -28,16 +29,24 @@ struct HabitCreateView: View {
                 
                 Button(action: {
                     shouldPresentedCamera = true
+                    //code
+                    
                 }, label: {
-                    viewModel.image
+                    viewModel.image!
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 100, height: 100)
                         .foregroundColor(.orange)
                 })
                 
-                Text("Clique aqui para enviar")
-                    .padding(.bottom, 12)
+                PhotosPicker(selection: $viewModel.imageSelection, matching: .images) {
+                    Text("Abrir galeria")
+                        .foregroundColor(.red)
+                        .padding(.bottom, 12)
+                }
+                
+                //Text("Clique aqui para enviar")
+                    //.padding(.bottom, 12)
 
             }
             VStack {
