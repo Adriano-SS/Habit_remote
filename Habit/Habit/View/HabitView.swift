@@ -39,7 +39,7 @@ struct HabitView: View {
                                 }
                             }
                             else if case HabitIUState.fullList(let rows) = viewModel.uiState {
-                                LazyVStack {
+                                VStack {
                                     ForEach(rows) { row in
                                         HabitCardView(isChart: viewModel.isCharts, viewModel: row)
                                     }

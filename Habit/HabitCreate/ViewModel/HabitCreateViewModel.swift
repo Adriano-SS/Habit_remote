@@ -67,11 +67,18 @@ class HabitCreateViewModel: ObservableObject {
         }
         Task { @MainActor in
             if let data = try? await selection.loadTransferable(type: Data.self) {
-
                 if let selectedImage = UIImage(data: data) {
-                    //print(selectedImage)
-                    self.image = Image(uiImage: selectedImage)
-                    self.imageData = selectedImage.jpegData(compressionQuality: 0.5)
+                    
+                    let widthImage: CGFloat = 420.0
+                    let canvasImage = CGSize(width: widthImage, height: CGFloat(ceil(
+                        widthImage / selectedImage.size.width * selectedImage.size.height)))
+                    
+                    let imgResized = UIGraphicsImageRenderer(size: canvasImage, format: selectedImage.imageRendererFormat).image { _ in
+                        selectedImage.draw(in: CGRect(origin: .zero, size: canvasImage))
+                    }
+                    
+                    self.image = Image(uiImage: imgResized)
+                    self.imageData = imgResized.jpegData(compressionQuality: 0.2)
                     return
                 }
             }
