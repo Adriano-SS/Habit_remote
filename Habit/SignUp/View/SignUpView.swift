@@ -62,7 +62,12 @@ struct SignUpView: View {
 
 extension SignUpView {
     var fullNameField: some View {
-        EditTextView(placeholder: "Nome completo", text: $viewModel.fullName, keyboard: .alphabet, error: "Nome deve ter mais que 4 letras", failure: viewModel.fullName.count < 4)
+        EditTextView(placeholder: "Nome completo",
+                     text: $viewModel.fullName,
+                     keyboard: .alphabet,
+                     error: "Nome deve ter mais que 4 letras",
+                     failure: viewModel.fullName.count < 4,
+                     autocapitalization: .words)
     }
 }
 

@@ -18,6 +18,10 @@ struct ImageView: View {
     }
     
     var body: some View {
+        /*
+        Opção de recarregamento sem o LazyVstack no Habit View
+        Image(uiImage: UIImage(data: imageLoader.data) ?? image)
+        */
         Image(uiImage: image)
             .resizable()
             .onReceive(imageLoader.didChange, perform: { data in
