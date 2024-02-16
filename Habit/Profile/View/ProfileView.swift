@@ -35,6 +35,7 @@ struct ProfileView: View {
                                     TextField("Digite o nome", text: $viewModel.fullNameValidation.value)
                                         .keyboardType(.alphabet)
                                         .multilineTextAlignment(.trailing)
+                                        .autocapitalization(.words)
                                 }
                                 
                                 if viewModel.fullNameValidation.failure {

@@ -35,20 +35,24 @@ class SplashViewModel: ObservableObject {
             .delay(for: .seconds(2), scheduler: RunLoop.main)
             .receive(on: DispatchQueue.main)
             .sink { userAuth in
+                //usuário ainda não logado
                 if userAuth == nil {
                     self.uiState = .goToSignInScreen
-                } else if (Date().timeIntervalSince1970 > userAuth!.expires) {
-                    //chamar refreshToken na API
+                }
+                //usuário logado e token expirado
+                else if (Date().timeIntervalSince1970 > userAuth!.expires) {
+                    print("Token Expirou")
                     let request = RefreshRequest(token: userAuth!.refreshToken)
                     self.cancellableRefresh = self.interactor.refreshToken(refreshRequest: request)
                         .receive(on: DispatchQueue.main)
                         .sink(receiveCompletion: { completion in
                             switch(completion) {
-                            case .failure(_):
-                                self.uiState = .goToSignInScreen
-                                break
-                            default:
-                                break
+                                //problema nos tokens informados
+                                case .failure(_):
+                                    self.uiState = .goToSignInScreen
+                                    break
+                                default:
+                                    break
                             }
                         }, receiveValue: { success in
                             let auth = UserAuth(idToken: success.accessToken,
@@ -59,8 +63,8 @@ class SplashViewModel: ObservableObject {
                             self.interactor.insertUser(userAuth: auth)
                             self.uiState = .goToHomeScreen
                         })
-                    print("Token Expirou")
                 }
+                //usuário logado e token válido
                 else {
                     self.uiState = .goToHomeScreen
                 }

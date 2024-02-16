@@ -36,17 +36,6 @@ struct SignUpView: View {
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
             }.padding()
             
-            /*if case SignUpUIState.success(let value) = viewModel.uiState {
-                Text("")
-                    .alert(isPresented: .constant(true)){
-                        Alert(title: Text("Personal Habits"), message: Text(value), dismissButton: .default(Text("OK")){
-                            //acao ao fechar o botao
-                        })
-                    }
-                    .background(Color.green)                
-                    viewModel.loginView()
-            }*/
-            
             if case SignUpUIState.error(let value) = viewModel.uiState {
                 Text("")
                     .alert(isPresented: .constant(true)){
@@ -62,8 +51,8 @@ struct SignUpView: View {
 
 extension SignUpView {
     var fullNameField: some View {
-        EditTextView(placeholder: "Nome completo",
-                     text: $viewModel.fullName,
+        EditTextView(text: $viewModel.fullName,
+                     placeholder: "Nome completo",
                      keyboard: .alphabet,
                      error: "Nome deve ter mais que 4 letras",
                      failure: viewModel.fullName.count < 4,
@@ -73,8 +62,8 @@ extension SignUpView {
 
 extension SignUpView {
     var emailField: some View {
-        EditTextView( placeholder: "E-mail",
-                      text: $viewModel.email,
+        EditTextView( text: $viewModel.email,
+                      placeholder: "E-mail",
                       keyboard: .emailAddress,
                       error: "E-mail invalido!",
                       failure: !viewModel.email.isEmail())
@@ -83,8 +72,8 @@ extension SignUpView {
 
 extension SignUpView {
     var passwordField: some View {
-        EditTextView( placeholder: "Password",
-                      text: $viewModel.password,
+        EditTextView( text: $viewModel.password,
+                      placeholder: "Password",
                       error: "A senha deve ter 8 caracteres!",
                       failure: viewModel.password.count < 8,
                       isSecure: true)
@@ -93,20 +82,35 @@ extension SignUpView {
 
 extension SignUpView {
     var documentField: some View {
-        EditTextView(placeholder: "CPF", text: $viewModel.document, keyboard: .numberPad, error: "CPF deve conter 11 numeros!", failure: viewModel.document.count != 11)
+        EditTextView(text: $viewModel.document,
+                     placeholder: "Entre com seu CPF",
+                     mask: "###.###.###-##",
+                     keyboard: .numberPad,
+                     error: "CPF inválido!",
+                     failure: viewModel.document.count != 14)
         
     }
 }
 
 extension SignUpView {
     var phoneField: some View {
-        EditTextView(placeholder: "Celular", text: $viewModel.phone, keyboard: .phonePad, error: "Entre com o DDD + 8 ou 9 dígitos", failure: viewModel.phone.count < 10 || viewModel.phone.count > 11)
+        EditTextView(text: $viewModel.phone,
+                     placeholder: "Celular",
+                     mask: "(##) ####-####",
+                     keyboard: .phonePad,
+                     error: "Entre com o DDD + 8 ou 9 dígitos",
+                     failure: viewModel.phone.count < 14 || viewModel.phone.count > 15)
     }
 }
 
 extension SignUpView {
     var birthdayField: some View {
-        EditTextView(placeholder: "Data de nascimento", text: $viewModel.birthday, keyboard: .numberPad, error: "Use o formato: dd/MM/aaaa", failure: viewModel.birthday.count != 10)    }
+        EditTextView(text: $viewModel.birthday,
+                     placeholder: "Data de nascimento",
+                     mask: "##/##/####",
+                     keyboard: .numberPad,
+                     error: "Use o formato: dd/mm/aaaa",
+                     failure: viewModel.birthday.count != 10)    }
 }
 
 extension SignUpView {
@@ -126,12 +130,19 @@ extension SignUpView {
 
 extension SignUpView {
     var saveButton: some View {
-        LoadingButtonView(action: {
-            viewModel.signUp()},
+        LoadingButtonView(
+            action: {
+                viewModel.signUp()
+            },
             text: "Realize seu cadastro",
             showProgress: self.viewModel.uiState == SignUpUIState.loading,
-            disable: !viewModel.email.isEmail() || viewModel.password.count < 8
-            )
+            disable: !viewModel.email.isEmail() ||
+            viewModel.password.count < 8 ||
+            viewModel.fullName.count < 4 ||
+            viewModel.document.count != 14 ||
+            viewModel.phone.count < 14 || viewModel.phone.count > 15 ||
+            viewModel.birthday.count != 10
+        )
     }
 }
 struct SignUpView_Previews: PreviewProvider {

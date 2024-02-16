@@ -126,10 +126,10 @@ struct HabitCardView_Previews: PreviewProvider {
                     HabitCardView(isChart: true, viewModel: HabitCardViewModel(
                         id: 2,
                         icon: "https://placehold.co/150x150/png",
-                        date: "01/11/2023 09:44:00",
-                        name: "Estudar Swift",
-                        label: "horas",
-                        value: "1",
+                        date: "12/06/2024 09:44:00",
+                        name: "Plantar árvores",
+                        label: "quantidade",
+                        value: "5",
                         state: .green,
                         habitPublisher: PassthroughSubject<Bool, Never>()))
                 }
