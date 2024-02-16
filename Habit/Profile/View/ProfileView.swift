@@ -65,11 +65,12 @@ struct ProfileView: View {
                                 HStack {
                                     Text("Celular")
                                     Spacer()
-                                    TextField("Digite o seu celular", text: $viewModel.phoneValidation.value)
-                                        .keyboardType(.numberPad)
-                                        .multilineTextAlignment(.trailing)
+                                    ProfileEditTextView(text: $viewModel.phoneValidation.value,
+                                                        placeholder: "Celular",
+                                                        mask: "(##) ####-####",
+                                                        keyboard: .numberPad)
                                 }
-                                
+
                                 if viewModel.phoneValidation.failure {
                                     Text("Entre com o DDD + 8 ou 9 dígitos")
                                         .foregroundColor(.red)
@@ -78,13 +79,15 @@ struct ProfileView: View {
                                 HStack {
                                     Text("Data de Nascimento")
                                     Spacer()
-                                    TextField("Digite a sua data de nascimento", text: $viewModel.birthdayValidation.value)
-                                        .keyboardType(.alphabet)
-                                        .multilineTextAlignment(.trailing)
+                                    ProfileEditTextView(text: $viewModel.birthdayValidation.value,
+                                                        placeholder: "Digite a sua data de nascimento",
+                                                        mask: "##/##/####",
+                                                        keyboard: .numberPad)
+                                    
                                 }
                                 
                                 if viewModel.birthdayValidation.failure {
-                                    Text("Use o formato: dd/MM/aaaa")
+                                    Text("Use o formato: dd/mm/aaaa")
                                         .foregroundColor(.red)
                                 }
                                 
