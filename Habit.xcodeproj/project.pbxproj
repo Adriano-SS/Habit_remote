@@ -18,6 +18,7 @@
 		B92493012AEA974800F2729F /* LocalDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B92493002AEA974800F2729F /* LocalDataSource.swift */; };
 		B939173D2AE1606A00A82FE5 /* SignInRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B939173C2AE1606A00A82FE5 /* SignInRequest.swift */; };
 		B939173F2AE161C800A82FE5 /* SignInResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B939173E2AE161C800A82FE5 /* SignInResponse.swift */; };
+		B94328602C56BF050099B7A4 /* HabitCreateInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B943285F2C56BF050099B7A4 /* HabitCreateInteractor.swift */; };
 		B9483F842AEBE550004B2EF4 /* SplashInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9483F832AEBE550004B2EF4 /* SplashInteractor.swift */; };
 		B94E71492B0E2F3600199B66 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B94E71482B0E2F3600199B66 /* ProfileView.swift */; };
 		B94E714B2B0E35C400199B66 /* GenderSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B94E714A2B0E35C400199B66 /* GenderSelectionView.swift */; };
@@ -64,7 +65,6 @@
 		B9EB09492AE7EEDF009B6F66 /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9EB09482AE7EEDF009B6F66 /* AppError.swift */; };
 		B9F772362B5A9FFD00EDA8B0 /* HabitCreateRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9F772352B5A9FFD00EDA8B0 /* HabitCreateRequest.swift */; };
 		B9F772382B5AA0DB00EDA8B0 /* HabitCreateRemoteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9F772372B5AA0DB00EDA8B0 /* HabitCreateRemoteDataSource.swift */; };
-		B9F7723A2B5AA4D200EDA8B0 /* HabitCreateInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9F772392B5AA4D200EDA8B0 /* HabitCreateInteractor.swift */; };
 		BC0255062AC3156C00709B00 /* Gender.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC0255052AC3156C00709B00 /* Gender.swift */; };
 		BC3FEB382AC24F410097AA35 /* SignInUIState.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC3FEB372AC24F410097AA35 /* SignInUIState.swift */; };
 		BC3FEB3A2AC25A3F0097AA35 /* SignInViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC3FEB392AC25A3F0097AA35 /* SignInViewRouter.swift */; };
@@ -103,6 +103,7 @@
 		B92493002AEA974800F2729F /* LocalDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDataSource.swift; sourceTree = "<group>"; };
 		B939173C2AE1606A00A82FE5 /* SignInRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInRequest.swift; sourceTree = "<group>"; };
 		B939173E2AE161C800A82FE5 /* SignInResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInResponse.swift; sourceTree = "<group>"; };
+		B943285F2C56BF050099B7A4 /* HabitCreateInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitCreateInteractor.swift; sourceTree = "<group>"; };
 		B9483F832AEBE550004B2EF4 /* SplashInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashInteractor.swift; sourceTree = "<group>"; };
 		B94E71482B0E2F3600199B66 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		B94E714A2B0E35C400199B66 /* GenderSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderSelectionView.swift; sourceTree = "<group>"; };
@@ -149,7 +150,6 @@
 		B9EB09482AE7EEDF009B6F66 /* AppError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppError.swift; sourceTree = "<group>"; };
 		B9F772352B5A9FFD00EDA8B0 /* HabitCreateRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitCreateRequest.swift; sourceTree = "<group>"; };
 		B9F772372B5AA0DB00EDA8B0 /* HabitCreateRemoteDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitCreateRemoteDataSource.swift; sourceTree = "<group>"; };
-		B9F772392B5AA4D200EDA8B0 /* HabitCreateInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitCreateInteractor.swift; sourceTree = "<group>"; };
 		BC0255052AC3156C00709B00 /* Gender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gender.swift; sourceTree = "<group>"; };
 		BC3FEB372AC24F410097AA35 /* SignInUIState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInUIState.swift; sourceTree = "<group>"; };
 		BC3FEB392AC25A3F0097AA35 /* SignInViewRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewRouter.swift; sourceTree = "<group>"; };
@@ -460,7 +460,7 @@
 			isa = PBXGroup;
 			children = (
 				B9F772372B5AA0DB00EDA8B0 /* HabitCreateRemoteDataSource.swift */,
-				B9F772392B5AA4D200EDA8B0 /* HabitCreateInteractor.swift */,
+				B943285F2C56BF050099B7A4 /* HabitCreateInteractor.swift */,
 			);
 			path = Interactor;
 			sourceTree = "<group>";
@@ -816,6 +816,7 @@
 				B9BD05E22AF131EB00C916D0 /* HabitViewModel.swift in Sources */,
 				B996C9112B7F90660005D283 /* ProfileEditTextView.swift in Sources */,
 				B98F428D2B025EA100FFF7E9 /* HabitDetailView.swift in Sources */,
+				B94328602C56BF050099B7A4 /* HabitCreateInteractor.swift in Sources */,
 				BCC8E6552AC4E01700AE7059 /* SignUpUIState.swift in Sources */,
 				B939173D2AE1606A00A82FE5 /* SignInRequest.swift in Sources */,
 				B97925772B3465E1006DE033 /* AreaChartView.swift in Sources */,
@@ -849,7 +850,6 @@
 				B9BABE4E2AE006410037B952 /* ErrorResponse.swift in Sources */,
 				B9BD05E02AF131B700C916D0 /* HabitView.swift in Sources */,
 				B9AB87162B03A4E10041C33C /* HabitDetailRemoteDataSource.swift in Sources */,
-				B9F7723A2B5AA4D200EDA8B0 /* HabitCreateInteractor.swift in Sources */,
 				BC620DB92AC79C4500C11623 /* CustomTextFieldStyle.swift in Sources */,
 				B9D56F0E2AF27A9300A38E1A /* HabitCardViewModel.swift in Sources */,
 				B90320BA2AFBB2C5004C7486 /* HabitRemoteDataSource.swift in Sources */,
